@@ -1,0 +1,30 @@
+[
+    {
+        "name": "ping",
+        "description": "shows the bot's ping"
+    },
+    {
+        "name": "hug",
+        "description": "hug someone!",
+        "options":[
+            {
+                "name": "user",
+                "description": "the username of the user you want to hug",
+                "type": 6,
+                "required": true
+            }
+        ]
+    },
+    {
+        "name": "cry",
+        "description": "sometimes it's okay to let out feelings flow",
+        "options":[
+            {
+                "name": "reason",
+                "description": "vent about what makes you feel bad!",
+                "type": 3,
+                "required": false
+            }
+        ]
+    }
+]
