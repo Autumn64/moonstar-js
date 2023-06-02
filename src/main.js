@@ -44,6 +44,14 @@ moon.on('interactionCreate', (interaction) => {
         case 'cry':
             commands.cry(interaction);
             break;
+        case 'avatar':
+            commands.avatar(interaction);
+            break;
+        case 'pride':
+            commands.pride(interaction);
+            break;
+        case 'meme':
+            commands.meme(interaction);
         default:
             break;
     }

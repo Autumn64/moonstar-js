@@ -26,5 +26,25 @@
                 "required": false
             }
         ]
+    },
+    {
+        "name": "avatar",
+        "description": "get someone's avatar",
+        "options":[
+            {
+                "name": "user",
+                "description": "the username of the user you want to get their avatar from",
+                "type": 6,
+                "required": false
+            }
+        ]
+    },
+    {
+        "name": "pride",
+        "description": "proud of who we are!"
+    },
+    {
+        "name": "meme",
+        "description": "send a random meme from reddit!"
     }
 ]
