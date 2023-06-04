@@ -46,5 +46,23 @@
     {
         "name": "meme",
         "description": "send a random meme from reddit!"
+    },
+    {
+        "name": "translate",
+        "description": "translate from and to any language!",
+        "options":[
+            {
+                "name": "message",
+                "description": "the text you want to translate",
+                "type": 3,
+                "required": true
+            },
+            {
+                "name": "language",
+                "description": "the language you want to translate to",
+                "type": 3,
+                "required": false
+            }
+        ]
     }
 ]

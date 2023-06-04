@@ -52,6 +52,8 @@ moon.on('interactionCreate', (interaction) => {
             break;
         case 'meme':
             commands.meme(interaction);
+        case 'translate':
+            commands.translation(interaction);
         default:
             break;
     }

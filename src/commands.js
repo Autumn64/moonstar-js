@@ -1,6 +1,7 @@
 const v = require('./variables.json');
 const { EmbedBuilder } = require('discord.js');
 const axios = require('axios');
+const { translate } = require('@vitalets/google-translate-api');
 
 async function hug(interaction){
     var id = interaction.options.getUser('user').id;
@@ -76,10 +77,55 @@ async function meme(interaction){
     return;
 }
 
+async function translation(interaction){
+    await interaction.deferReply();
+    var message = interaction.options.get('message').value;
+    var destlang = interaction.options.get('language'); //Might be null since argument is optional.
+    var key;
+    const languages = Object.keys(v.LANGUAGES).reduce((value, keys) => {
+        value[keys.toLowerCase()] = v.LANGUAGES[keys];
+        return value;
+    }, {});
+    if (destlang === null){
+        key = "English";
+        destlang = "en";
+    }else{
+        if(languages.hasOwnProperty(destlang.value.toLowerCase())){
+            key = destlang.value.toLowerCase();
+            destlang = languages[key];
+        }else{
+            interaction.followUp({
+                content: "I'm sorry, I can't speak `" + destlang.value + "`.",
+                ephemeral: true
+            });
+            return;
+        }
+    }
+    try{
+        const resp = await translate(message, { to: destlang });
+        const embed = new EmbedBuilder()
+        .setColor('Random')
+        .setTitle(`Translation from ${v.LANGUAGEKEYS[resp.raw.src]} to ${v.LANGUAGEKEYS[destlang]}.`)
+        .setURL(`https://translate.google.com/?sl=auto&tl=${destlang}&text=${message.replace(/ /g, '%20')}`)
+        .setThumbnail("https://cdn2.iconfinder.com/data/icons/web-store-crayons-volume-1/256/Language-512.png")
+        .addFields({ name: `${interaction.user.username} wrote:`, value: message},
+                   { name: "Which translates to:", value: resp.text});
+        interaction.followUp({ embeds: [embed] });
+    }catch(e){
+        interaction.followUp({
+            content: "ERROR: `" + e + "`. This incident will be reported.",
+            ephemeral: true
+        });
+        console.log(e);
+    }
+    return;
+}
+
 module.exports = {
     hug,
     cry,
     avatar,
     pride,
-    meme
+    meme,
+    translation
 }
