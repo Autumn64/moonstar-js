@@ -9,6 +9,7 @@
   "author": "Autumn64",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "@vitalets/google-translate-api": "^9.2.0",
     "axios": "^1.4.0",
     "discord.js": "^14.11.0"
   }
