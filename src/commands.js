@@ -110,9 +110,9 @@ async function translation(interaction){
         .setThumbnail("https://cdn2.iconfinder.com/data/icons/web-store-crayons-volume-1/256/Language-512.png")
         .addFields({ name: `${interaction.user.username} wrote:`, value: message},
                    { name: "Which translates to:", value: resp.text});
-        interaction.followUp({ embeds: [embed] });
+        await interaction.followUp({ embeds: [embed] });
     }catch(e){
-        interaction.followUp({
+        await interaction.followUp({
             content: "ERROR: `" + e + "`. This incident will be reported.",
             ephemeral: true
         });
