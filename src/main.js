@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits, Partials, ChannelType } = require('discord.js');
 const { token } = require('./config.json');
-const commands = require('./commands.js');
+const Commands = require('./commands.js');
 const variables = require('./variables.json');
 
 const moon = new Client({ //Instance bot with intents
@@ -18,6 +18,8 @@ const moon = new Client({ //Instance bot with intents
         GatewayIntentBits.DirectMessageReactions,
     ]
 });
+
+const commands = new Commands(moon);
 
 moon.on('ready', (c) => {
     console.log(`Logged in as ${c.user.tag}`);
@@ -39,7 +41,7 @@ moon.on('interactionCreate', (interaction) => {
             commands.hug(interaction);
             break;
         case 'ping':
-            interaction.reply(`Pong! 🏓 Ping is ${moon.ws.ping} ms`);
+            commands.ping(interaction);
             break;
         case 'cry':
             commands.cry(interaction);
