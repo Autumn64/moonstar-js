@@ -48,7 +48,7 @@
         "description": "send a random meme from reddit!"
     },
     {
-        "name": "translate",
+        "name": "translation",
         "description": "translate from and to any language!",
         "options":[
             {

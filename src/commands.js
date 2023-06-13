@@ -9,7 +9,11 @@ class Commands{
         this.client = client;
     }
 
-    async hug(interaction){
+    async runCommand(command, interaction){
+        return await this[`_${command}`](interaction);
+    }
+
+    async _hug(interaction){
         var id = interaction.options.getUser('user').id;
         if(id === '1112478094469632132'){
             await interaction.reply(`<@${interaction.user.id}>, thank you! <3`);
@@ -24,11 +28,11 @@ class Commands{
         return;
     }
 
-    async ping(interaction){
+    async _ping(interaction){
         interaction.reply(`Pong! 🏓 Ping is ${this.client.ws.ping} ms`);
     }
 
-    async cry(interaction){
+    async _cry(interaction){
         await interaction.reply(`<@${interaction.user.id}> is crying!`);
         await interaction.channel.send(v.crygif[Math.floor(Math.random() * v.crygif.length)]);
         var reason = interaction.options.get('reason');
@@ -51,7 +55,7 @@ class Commands{
         return;
     }
 
-    async avatar(interaction){
+    async _avatar(interaction){
         const embed = new EmbedBuilder(); //Create embed
         var user = interaction.options.getUser('user');
         if (user !== null){
@@ -70,7 +74,7 @@ class Commands{
         return;
     }
 
-    async pride(interaction){
+    async _pride(interaction){
         await interaction.reply({
             content: v.lgbtqplus[Math.floor(Math.random() * v.lgbtqplus.length)],
             ephemeral: true
@@ -78,7 +82,7 @@ class Commands{
         return;
     }
 
-    async meme(interaction){
+    async _meme(interaction){
         var subrdd = v.subrdd[Math.floor(Math.random() * v.subrdd.length)];
         const response = (await axios.get(`https://www.reddit.com/r/${subrdd}/hot.json`)).data.data.children;
         const posts = response.map(post => post.data.permalink); //Get the links from the JSON.
@@ -87,7 +91,7 @@ class Commands{
         return;
     }
 
-    async translation(interaction){
+    async _translation(interaction){
         await interaction.deferReply();
         const languages = Object.keys(v.LANGUAGES).reduce((value, keys) => {
             value[keys.toLowerCase()] = v.LANGUAGES[keys];

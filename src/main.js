@@ -34,33 +34,10 @@ moon.on('messageCreate', async (message) => {
 });
 
 moon.on('interactionCreate', (interaction) => {
-    if(!interaction.isChatInputCommand()) return;
 
-    switch(interaction.commandName){
-        case 'hug':
-            commands.hug(interaction);
-            break;
-        case 'ping':
-            commands.ping(interaction);
-            break;
-        case 'cry':
-            commands.cry(interaction);
-            break;
-        case 'avatar':
-            commands.avatar(interaction);
-            break;
-        case 'pride':
-            commands.pride(interaction);
-            break;
-        case 'meme':
-            commands.meme(interaction);
-            break;
-        case 'translate':
-            commands.translation(interaction);
-            break;
-        default:
-            break;
-    }
+    if(!interaction.isChatInputCommand()) return;
+    commands.runCommand(interaction.commandName, interaction);
+
 });
 
 moon.login(token);
